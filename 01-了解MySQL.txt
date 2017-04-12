@@ -1,0 +1,76 @@
+MySQL登录：
+  mysql 参数
+
+mysql -uroot -p -P3306 -h127.0.0.1
+
+-u,--user=name   用户名
+-p,--password[=name]   密码
+-P,--port=#   端口号
+-h,--host=name   服务器名称
+--prompt=name   设置提示符
+-D,--database=name   打开指定数据库
+--delimiter=name   指定分隔符
+-V,--version   输出版本信息并且退出
+
+MySQL退出：
+  exit
+  quit
+  \q
+
+-----------------------------
+
+修改MySQL提示符：
+
+连接客户端时通过参数指定
+mysql -uroot -p123456 --prompt 提示符
+
+连接上客户端后，通过prompt命令修改
+prompt 提示符
+
+  \D  完整的日期
+  \d  当前数据库
+  \h  服务器名称
+  \u  当前用户
+
+-------------------------------
+
+MySQL常用命令：
+
+显示当前服务器版本
+SELECT VERSION();
+
+显示当前日期时间
+SELECT NOW();
+
+显示当前用户
+SELECT USER();
+
+-----------------------
+
+MySQL语句的规范：
+
+关键字与函数名称全部大写
+数据库名称、表名称、字段名称全部小写
+SQL语句必须以分号结尾
+
+-----------------------
+
+创建数据库
+  CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name;
+  CREATE DATABASE t1;
+
+查看当前服务器下的数据库列表
+  SHOW {DATABASES | SCHEMAS};
+  SHOW DATABASES;
+
+修改数据库
+  ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name;
+
+删除数据库
+  DROP {DATABASE | SCHEMA} [IF EXISTS] db_name;
+
+查看警告信息
+  SHOW WARNINGS;
+
+查看数据库创建时的指令
+  SHOW CREATE DATABASE db_name;
