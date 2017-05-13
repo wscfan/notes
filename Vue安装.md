@@ -25,7 +25,7 @@ firstVue 为项目名称
 cd firstVue
 ```
 安装项目
-```dos
+```dos 
 cnpm install
 ```
 6、此时，打开项目文件夹，会多出一个 node_modules 文件夹，里边的内容是之前安装的依赖
