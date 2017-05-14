@@ -292,8 +292,24 @@ if($dog1 instanceof Dog){
 }
 ```
 
+#### 5.4 执行运算符
+- 基本说明
+PHP 支持一个执行运算符：反引号（\`\`）, PHP 将尝试将反引号中的内容作为外壳命令来执行，并将其输出信息返回。使用反引号运算符的效果与函数 `shell_exec()` 相同。
+```
+echo '<pre>';
+echo `netstat -anb`;
+```
 
+#### 5.5 错误控制运算符
+PHP 支持一个错误控制运算符：`@`。当将其放在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉。  
+`@` 一般可以和 `die` 配合使用，使致命错误不被忽略。
+```
+$con = @mysql_connect('localhost','root','root') or die(mysql_error());
+if($con){
+	echo 'ok';
+}else{
+	echo 'error';
+}
+```
 
-
-
-
+### 6、流程控制
