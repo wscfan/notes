@@ -345,3 +345,33 @@ require 'mytpl.html';
 $age=16;
 require 'mytpl.html';
 ```
+
+- **多分支分支控制替代语法：**
+```html
+<!--模板文件-->
+<?php if($age > 18):?>
+<h1>年龄大于18岁</h1>
+<?php elseif($age < 16):?>
+<h2>年龄小于16岁</h2>
+<?php else:?>
+<h3>年龄在16岁到18岁之间</h3>
+<?php endif;?>
+```
+```php
+// PHP文件
+$age=17;
+require 'mytpl.html';
+```
+
+### 6、循环控制
+1. for 循环
+2. while 循环
+3. dowhile 循环
+
+- **goto 语句**
+```php
+goto a;
+echo 'aa';
+a:
+echo 'bb';
+```
