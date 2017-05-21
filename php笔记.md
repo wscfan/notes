@@ -401,3 +401,24 @@ echo 'tax=' . $tax;
 |\_\_DIR\_\_|显示当前文件的路径，不含文件名|
 |\_\_FILE\_\_|显示当前文件的路径，含文件名|
 |\_\_FUNCTION\_\_|显示当前函数的函数名|
+
+#### 7.2 变量名、函数名、常量名的可变性讨论
+```php
+$a='Hello World!';
+$var='a';
+echo $$var;
+```
+```php
+function test(){
+	echo 'Hello World!';
+}
+$fun='test';
+$fun();
+```
+```php
+define('PI',3.14);
+$my_pi='PI';
+echo constant($my_pi);
+```
+
+### 8、函数
