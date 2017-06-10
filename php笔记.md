@@ -545,6 +545,11 @@ var_dump($arr);
 |is_array()|判断是否为数组|
 |sort()|排序|
 |usort()|使用用户自定义的比较函数对数组中的值进行排序|
+|array_merge()|合并数组|
+|array_reverse()|数组颠倒|
+|array_search()|搜索值|
+|array_pop()|将数组最后一个单元弹出（出栈）|
+|array_push()|将一个或多个单元压入数组的末尾（入栈）|
 
 ```php
 $arr=array(12,34,45,2,34,4,23,5,3,39,34,344);
