@@ -566,3 +566,32 @@ usort($arr,function($n1,$n2){
 });
 var_dump($arr);
 ```
+```php
+$arr = array('a','b','c','d','f');
+$arr=array_reverse($arr);
+var_dump($arr);
+$arr_last = array_pop($arr);
+$arr_last = strtoupper($arr_last);
+array_push($arr,$arr_last);
+var_dump($arr);  // f d c b A
+```
+
+#### 9.4 删除数组或数组项
+```php
+$arr = array('a','b','c','d');
+unset($arr);  // 删除数组
+unset($arr[2]);  // 删除数组项
+```
+
+#### 9.5 数组的空间分配机制
+|函数名|说明|
+|-----|----|
+|memory_get_usage()|返回分配给 PHP 的内存量|
+
+#### 9.6 数组的运算符
+```PHP
+$arr1 = array(1,6);
+$arr2 = array(2,8,9);
+$arr3 = $arr1 + $arr2;
+print_r($arr3);  // 1 6 9
+```
