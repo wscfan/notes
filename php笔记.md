@@ -595,3 +595,26 @@ $arr2 = array(2,8,9);
 $arr3 = $arr1 + $arr2;
 print_r($arr3);  // 1 6 9
 ```
+
+#### 9.7 排序
+##### 9.7.1 冒泡排序
+```php
+$arr = array(12,23,34,1,-12,26,56,234,237,9);
+function bubble(&$arr){
+	$arr_len=count($arr);
+	for($i = 0; $i < $arr_len-1; $i++){
+		for($j = 0; $j < $arr_len-1-$i; $j++){
+			if($arr[$j] > $arr[$j + 1]){
+				$temp=$arr[$j];
+				$arr[$j]=$arr[$j+1];
+				$arr[$j+1]=$temp;
+			}
+		}
+	}
+}
+bubble($arr);
+echo '<pre>';
+print_r($arr);
+```
+
+##### 9.7.2 选择排序
