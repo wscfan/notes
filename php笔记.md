@@ -599,8 +599,10 @@ print_r($arr3);  // 1 6 9
 #### 9.7 排序
 ##### 9.7.1 冒泡排序
 ```php
+// 代码优化之后，速度有很大提升
 $arr = array(12,23,34,1,-12,26,56,234,237,9);
 function bubble(&$arr){
+	$flag = 0;
 	$arr_len=count($arr);
 	for($i = 0; $i < $arr_len-1; $i++){
 		for($j = 0; $j < $arr_len-1-$i; $j++){
@@ -608,13 +610,45 @@ function bubble(&$arr){
 				$temp=$arr[$j];
 				$arr[$j]=$arr[$j+1];
 				$arr[$j+1]=$temp;
+				$flag = 1;
 			}
+		}
+		if($flag == 0){
+			break;
+		}else{
+			$flag = 0;
 		}
 	}
 }
+date_default_timezone_set('PRC');
+echo '<br>' . date('H:i:s');
 bubble($arr);
+echo '<br>' . date('H:i:s');
 echo '<pre>';
 print_r($arr);
 ```
 
 ##### 9.7.2 选择排序
+```php
+$arr = array(12,34,99,3,45,103,4);
+function selectSort(&$arr){
+	$arr_len=count($arr);
+	for($i = 0; $i < $arr_len; $i++){
+		$arr_min = $arr[$i];
+		$arr_index = $i;
+		for($j = $i; $j < $arr_len; $j++){
+			if($arr_min > $arr[$j]){
+				$arr_min = $arr[$j];
+				$arr_index = $j;
+			}
+		}
+		if($arr_index != $i){
+			$arr[$arr_index] = $arr[$i];
+			$arr[$i] = $arr_min;
+		}
+	}
+}
+selectSort($arr);
+echo '<pre>';
+print_r($arr);
+```
