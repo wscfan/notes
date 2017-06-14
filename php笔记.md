@@ -652,3 +652,44 @@ selectSort($arr);
 echo '<pre>';
 print_r($arr);
 ```
+
+#### 9.8 查找
+##### 9.8.1 顺序查找
+```php
+$arr = array(12,3,34,45,111,23,5,67,23);
+function search($arr,$item){
+	$arr_len = count($arr);
+	$flag = 0;
+	for($i = 0; $i < $arr_len; $i++){
+		if($item == $arr[$i]){
+			echo '找到了，索引值为：' . $i . '<br>';
+			$flag = 1;
+		}
+	}
+	if($flag == 0){
+		echo '很抱歉，没有找到哦。';
+	}
+}
+search($arr,23);
+```
+
+##### 9.8.2 二分法查找
+二分法查找适用于查找有序的数组。
+```php
+$arr = array(1,3,6,12,22,34,45,56,67,99,122,155);
+function searchNum($left_index,$right_index,$arr,$item){
+	if($left_index > $right_index){
+		echo '很抱歉，没有找到。';
+		return;
+	}
+	$mid_index = round(($left_index + $right_index) / 2);
+	if($arr[$mid_index] == $item){
+		echo '找到了，索引值为：' . $mid_index;
+	}else if($arr[$mid_index] > $item){
+		searchNum($left_index,$mid_index-1,$arr,$item);
+	}else if($arr[$mid_index] < $item){
+		searchNum($mid_index+1,$right_index,$arr,$item);
+	}
+}
+searchNum(0,count($arr)-1,$arr,288);
+```
