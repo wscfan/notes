@@ -312,6 +312,16 @@ if($con){
 }
 ```
 
+#### 5.6 位运算符
+##### 5.6.1 二进制
+1. 二进制的最高位是符号位：0表示正数，1表示负数
+2. 正数的原码，反码，补码都一样
+3. 负数的反码=它的原码符号位不变，其它位取反
+4. 负数的补码=它的反码+1
+5. 0的反码、补码都是0
+6. php没有无符号数，换言之，php中的数都是有符号的
+7. 在计算机运算的时候，都是以补码的方式来运算的
+
 ### 6、流程控制
 #### 6.1 顺序控制
 #### 6.2 分支控制
@@ -692,4 +702,34 @@ function searchNum($left_index,$right_index,$arr,$item){
 	}
 }
 searchNum(0,count($arr)-1,$arr,288);
+```
+
+#### 9.9 二维数组
+```php
+$arr = array(array(12,23,34),array(123,345,333),100);
+$arr_len = count($arr);
+for($i = 0; $i < $arr_len; $i++){
+	$arr2_len = count($arr[$i]);
+	if(is_array($arr[$i])){
+		for($j = 0; $j < $arr2_len; $j++){
+			echo $arr[$i][$j] . ' ';
+		}
+	}else{
+		echo $arr[$i];
+	}
+	echo '<br>';
+}
+```
+```php
+$arr = array(array(12,23,34),array(123,345,333),100);
+foreach($arr as $val){
+	if(is_array($val)){
+		foreach($val as $v){
+			echo $v . ' ';
+		}
+	}else{
+		echo $val . ' ';
+	}
+	echo '<br>';
+}
 ```
