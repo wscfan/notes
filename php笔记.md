@@ -767,3 +767,7 @@ foreach($arr as $val){
 ```
 
 ### 10、PHP面向对象
+#### 10.1 类的定义
+1. 类的定义有一个关键字，就是 class
+2. 成员属性是指的类中定义的变量
+3. 成员属性前面有修饰符（public），public 就是访问控制符，oop 有三种（public、protected、private）
