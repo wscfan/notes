@@ -771,3 +771,44 @@ foreach($arr as $val){
 1. 类的定义有一个关键字，就是 class
 2. 成员属性是指的类中定义的变量
 3. 成员属性前面有修饰符（public），public 就是访问控制符，oop 有三种（public、protected、private）
+
+```php
+class Person{
+	public $name;
+}
+$p1 = new Person();
+$p1 -> name = '张三';
+echo $p1 -> name;
+```
+#### 10.2 成员函数
+```php
+class Person{
+	public function sum($a,$b){
+		return $a + $b;
+	}
+}
+$p = new Person();
+$num = $p->sum(10,20);
+echo '结果为：' . $num;
+```
+
+#### 10.3 构造方法
+构造方法是类的一种特殊的方法，它的主要作用是完成对新对象的初始化。
+1. 没有返回值
+2. 在创建一个类的新对象时，系统会自动地调用该类的构造方法完成对新对象的初始化。
+3. 在 PHP4 中，它的构造函数和类名一样。
+4. 在 PHP5 中，使用 `__construct` 方式来定义构造函数。
+5. 一个类中只能有一个构造函数。
+
+```php
+class Person{
+	public $name;
+	public $age;
+	public function __construct($my_name,$my_age){
+		$this->name = $my_name;
+		$this->age = $my_age;
+	}
+}
+$p1 = new Person('张三',22);
+echo $p1->name . ':' . $p1->age . '岁';
+```
