@@ -812,3 +812,93 @@ class Person{
 $p1 = new Person('张三',22);
 echo $p1->name . ':' . $p1->age . '岁';
 ```
+
+#### 10.4 析构函数
+析构函数会在某个对象的所有引用都被删除或者当对象被显式销毁时执行。析构函数主要作用是去释放对象被分配的相关资源。
+```php
+function __destruct(){
+	// 释放资源操作
+}
+```
+
+#### 10.5 魔术修饰符
+1. public（公有）：类成员可以在任何地方被访问；
+2. protected（受保护）：类成员可以被其自身以及其子类和父类访问；
+3. private（私有）：类成员只能被其定义所在的类访问。
+```php
+class Test{
+	public $a;
+	protected $b;
+	private $c;
+	public function __construct($aa){
+		$this->a = $aa;
+	}
+	function fn($bb){
+		$this->b = $bb;
+		return $this->b;
+	}
+	function fn2($cc){
+		$this->c = $cc;
+		return $this->c;
+	}
+}
+$test = new Test(12);
+echo $test->a . '<br>';
+echo $test->fn(23) . '<br>';
+echo $test->fn2(34);
+```
+
+#### 10.6 魔术方法  
+`__get` ，读取不可访问属性的值（如 private/protected/不存在）时，`__get()` 会被调用。  
+`__set` ，在给不可访问属性赋值（如 private/protected/不存在）时，`__set()` 会被调用。
+```php
+class Person{
+	public $name;
+	protected $age;
+	function __construct($name,$age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+	function __get($p_age){
+		if(isset($this->$p_age)){
+			return $this->$p_age;
+		}else{
+			return '<br>属性不存在。';
+		}
+	}
+}
+$p1 = new Person('张三',19);
+echo $p1->name . '<br>';
+echo $p1->age;
+```
+```php
+class Person{
+	public $name;
+	protected $age;
+	function __construct($name,$age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+	function __get($p_age){
+		if(isset($this->$p_age)){
+			return $this->$p_age;
+		}else{
+			return '属性不存在。<br>';
+		}
+	}
+	function __set($pro_name,$val){
+		if(isset($this->$pro_name)){
+			$this->$pro_name = $val;
+		}else{
+			echo '属性不存在<br>';
+		}
+	}
+}
+$p1 = new Person('张三',19);
+$p1->name = '李四';
+$p1->age = 20;
+echo $p1->name . '<br>';
+echo $p1->age . '<br>';
+```
+`__isset` ，当对不可访问属性（如：private/protected/不存在）调用 `isset()` 或 `empty()` 时， `__isset()` 会被调用。  
+`__unset` ，当对不可访问属性（如：private/protected/不存在）调用 `unset()` 时， `__unset()` 会被调用。
