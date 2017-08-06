@@ -903,3 +903,5 @@ echo $p1->age . '<br>';
 `__isset` ，当对不可访问属性（如：private/protected/不存在）调用 `isset()` 或 `empty()` 时， `__isset()` 会被调用。  
 `__unset` ，当对不可访问属性（如：private/protected/不存在）调用 `unset()` 时， `__unset()` 会被调用。
 `__toString()` ，当我们把一个对象当做字符串使用时，会调用 `toString()` 方法。
+`__clone()`
+`__call()` ，在对象调用一个不可访问的方法时，`__call()` 会被调用。
