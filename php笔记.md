@@ -905,3 +905,20 @@ echo $p1->age . '<br>';
 `__toString()` ，当我们把一个对象当做字符串使用时，会调用 `toString()` 方法。
 `__clone()`
 `__call()` ，在对象调用一个不可访问的方法时，`__call()` 会被调用。
+
+#### 10.7 类的自动加载
+`__autoload` 尝试加载未定义的类
+```php
+function __autoload($class_name){
+	global $class_map;
+	require $class_map[$class_name];
+}
+```
+`spl_autoload_register`： 注册 `__autoload()` 函数
+```php
+spl_autoload_register('myAutoLoad');
+function myAutoLoad($class_name){
+	global $class_map;
+	require $class_map[$class_name];
+}
+```
