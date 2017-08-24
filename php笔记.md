@@ -906,19 +906,13 @@ echo $p1->age . '<br>';
 `__clone()`
 `__call()` ，在对象调用一个不可访问的方法时，`__call()` 会被调用。
 
-#### 10.7 类的自动加载
-`__autoload` 尝试加载未定义的类
+#### 10.7 类的静态属性
+1. 定义静态属性
 ```php
-function __autoload($class_name){
-	global $class_map;
-	require $class_map[$class_name];
-}
+访问修饰符 static 变量名;
 ```
-`spl_autoload_register`： 注册 `__autoload()` 函数
+2. 访问静态属性
 ```php
-spl_autoload_register('myAutoLoad');
-function myAutoLoad($class_name){
-	global $class_map;
-	require $class_map[$class_name];
-}
+在类外部：类名::$静态属性名（要求属性是public）  
+在类内部：self::$静态属性名 或者 类名::$静态属性名
 ```
