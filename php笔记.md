@@ -927,3 +927,34 @@ echo $p1->age . '<br>';
 ```php
 类名::静态方法名
 ```
+
+### 10.8 继承
+`extends` 继承
+```php
+<?php
+header('Content-Type:text/html;charset=utf-8');
+class Student{
+	public $name;
+	public $age;
+	public function __construct($name,$age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+}
+class SmallStudent extends Student{
+	public function say($content){
+		echo '小学生 ' . $this->name . ' 说：' . $content . '<br>';
+	}
+}
+class BigStudent extends Student{
+	public function interest($content){
+		echo '大学生 ' . $this->name . ' 喜欢 ' . $content . '<br>';
+	}
+}
+$s1 = new SmallStudent('李白',22);
+$s1->say('我喜欢作诗。');
+
+$b1 = new BigStudent('武松',28);
+$b1->interest('打虎');
+?>
+```
