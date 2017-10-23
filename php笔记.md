@@ -958,3 +958,107 @@ $b1 = new BigStudent('武松',28);
 $b1->interest('打虎');
 ?>
 ```
+
+#### 10.8.1 调用父类方法的三种形式：
+```php
+class A{
+	public function __construct(){
+		echo 'A 类构造函数已经输出。<br>';
+	}
+	public function sayHello(){
+		echo 'Hello World!<br>';
+	}
+}
+class B extends A{
+	public function getA(){
+		// $this->sayHello();
+		// A::sayHello();
+		parent::sayHello();
+	}
+}
+$b = new B();
+$b->getA();
+```
+
+### 10.9 重写
+1. 在子类中需要访问父类的方法，可以使用`父类::方法名` 或者 `parent::方法名` 来完成。
+2. `parent::静态属性` 这种方式不能访问普通属性，但是能访问父类的
+静态属性，而且这个静态属性的访问控制符必须是 public 或者 protected。
+
+### 10.10 抽象类
+如果一个类有一个方法不确定，
+1. 可以将这个方法声明为抽象，则需要在前面写上 abstract ，
+2. 被声明为 abstract 的方法不能有方法体。
+3. 如果一个类中，只要含有一个抽象方法，则该类必须声明为 abstract 。
+4. 抽象类重点在设计，它的作用是让其它类来继承它，并实现它的方法。
+```php
+class Animal{
+	abstract public function cry();
+}
+```
+
+**抽象类的细节：**
+1. 抽象类不能被实例化；
+2. 抽象类可以没有 abstract 方法；
+3. 抽象类可以有非抽象方法，成员属性和常量；
+4. 一旦类包含了 abstract 方法，则这个类必须声明为 abstract；
+5. 抽象类方法不能有函数体；
+6. 如果一个类继承了某个抽象类，则它必须实现该抽象类的所有抽象方法。（除非它自己也声明为抽象类）【多级继承】
+
+### 10.11 接口
+接口就是给出一些没有实现的方法，封装到一起，到某个类要使用的时候，再根据具体情况把这些方法写出来。   
+```php
+interface 接口名{
+	// 方法【不含方法体】
+}
+```
+接口里的所有方法都没有方法题体。
+```php
+<?php
+header('Content-Type:text/html;charset=utf-8');
+// 电脑插入外部设备
+interface iUsb{
+	// 开始工作
+	public function start();
+	//停止工作
+	public function stop();
+}
+
+// 手机实现接口方法
+class Phone implements iUsb{
+	public function start(){
+		echo '手机开始工作<br>';
+	}
+	public function stop(){
+		echo '手机停止工作<br>';
+	}
+}
+
+// 相机来实现接口的方法
+class Camera implements iUsb{
+	public function start(){
+		echo '相机开始工作<br>';
+	}
+	public function stop(){
+		echo '相机停止工作<br>';
+	}
+}
+
+// 计算机类
+class Computer{
+	public function work($iUsb){
+		$iUsb->start();
+		echo '工作了10个小时<br>';
+		$iUsb->stop();
+	}
+}
+
+// 创建手机/相机对象
+$phone = new Phone();
+$camera = new Camera();
+// 创建computer对象
+$computer = new Computer();
+$computer->work($phone);
+$computer->work($camera);
+?>
+```
