@@ -1062,3 +1062,44 @@ $computer->work($phone);
 $computer->work($camera);
 ?>
 ```
+
+### 10.12 序列化和反序列化
+序列化是把一个对象的属性名称、属性类型和属性值都保存到一个文件中。可以通过反序列化使对象重新恢复。
+```php<?php
+header('Content-Type:text/html;charset=utf-8');
+
+// 创建类
+class student{
+	public $name;
+	public $age;
+	public $school;
+	public function __construct($name,$age,$school){
+		$this->name = $name;
+		$this->age = $age;
+		$this->school = $school;
+	}
+}
+class school{
+	public $name;
+	public $address;
+	public function __construct($name,$address){
+		$this->name = $name;
+		$this->address = $address;
+	}
+}
+
+// 实例化对象
+$s = new school('第一中学','湖北武汉');
+$p = new student('张三',19,$s);
+
+// 序列化
+file_put_contents('info.txt',serialize($p));
+echo '序列化成功<br>';
+
+// 反序列化
+$p1 = file_get_contents('info.txt');
+echo '<pre>';
+var_dump(unserialize($p1));
+
+?>
+```
