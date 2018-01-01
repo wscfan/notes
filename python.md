@@ -159,3 +159,12 @@ for m in 'ABC':
 	for n in '123':
 		L.append(m + n)
 ```
+
+## 8、map()
+map() 接收一个函数 f 和一个 list ，并通过把函数 f 依次作用在 list 的每个元素上，得到一个新的 list 并返回。
+```python
+def f(x)
+	return x * x
+print map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+# [1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
