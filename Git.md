@@ -88,3 +88,5 @@ git remote add origin git@github.com:wscfan/myweb.git
 ```
 git push origin master
 ```
+
+![](http://image.beekka.com/blog/2014/bg2014061202.jpg)
