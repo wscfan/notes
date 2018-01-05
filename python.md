@@ -168,3 +168,36 @@ def f(x)
 print map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])
 # [1, 4, 9, 16, 25, 36, 49, 64, 81]
 ```
+
+## 9、reduce()
+reduce() 函数接收的参数和 map() 类似，一个函数 f ，一个 list 。 reduce() 传入的函数 f 必须接收两个参数，reduce() 对 list 的每一个元素反复调用函数 f ，并返回最终结果。
+reduce() 还可以接收第三个参数，作为计算的初始值。
+```python
+def f(x, y):
+	return x + y
+print reduce(f, [1, 3, 5, 7, 9])  # 25
+print reduce(f, [1, 3, 5, 7, 9], 100)  # 125
+```
+
+## 10、filter()
+filter() 函数接收一个函数 f 和一个 list。
+```python
+def is_odd(x):
+	return x % 2 == 1
+filter(is_odd, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+# [1, 3, 5, 7, 9]
+```
+
+## 11、自定义排序函数 sorted()
+接收一个比较函数来实现自定义排序，比较函数传入两个元素 x, y ，如果 x 应该排在 y 前面，返回 -1 ，如果 x 应该排在 y 的后面，返回 1 。如果 x 和 y 相等，返回 0 。
+```python
+def reversed_cmp(x, y):
+	if x > y:
+		return -1
+	if x < y:
+		return 1
+	return 0
+
+sorted([23, 45, 13, 38, 49], reversed_cmp)
+# [49, 45, 38, 23, 13]
+```
