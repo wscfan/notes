@@ -1065,7 +1065,8 @@ $computer->work($camera);
 
 ### 10.12 序列化和反序列化
 序列化是把一个对象的属性名称、属性类型和属性值都保存到一个文件中。可以通过反序列化使对象重新恢复。
-```php<?php
+```php
+<?php
 header('Content-Type:text/html;charset=utf-8');
 
 // 创建类
@@ -1103,3 +1104,36 @@ var_dump(unserialize($p1));
 
 ?>
 ```
+
+## 三、PHP连接MySQL
+1. `mysql_connect` 建立数据库连接
+```php
+<?php
+	header('Content-type: text/html; charset=utf-8');
+	if ($con = mysql_connect('localhost', 'root', '')) {
+		echo '连接成功';
+	} else {
+		echo '连接失败';
+	}
+?>
+```
+2. `mysql_select_db` 选择数据库
+```php
+mysql_select_db('db1');
+```
+3. 设置连接的字符编码类型
+```php
+mysql_query("set names 'utf8'");
+```
+4. `mysql_close` 关闭数据库
+```php
+mysql_close($con);
+```
+5. 数据库查询
+对于查询类的语句，使用 `mysql_query` 会返回一个资源句柄（resource），可以通过该资源获取查询结果集中的数据。
+```php
+$res = mysql_query('select * from user limit 1');
+$row = mysql_fetch_array($res);
+var_dump($row);
+```
+6. `mysql_insert_id` 获取主键 id
