@@ -1136,4 +1136,10 @@ $res = mysql_query('select * from user limit 1');
 $row = mysql_fetch_array($res);
 var_dump($row);
 ```
+`mysql_fetch_array()` 结果为一个索引数组  
+`mysql_fetch_assoc()` 结果为一个关联数组
+`mysql_fetch_object()` 结果为一个对象
 6. `mysql_insert_id` 获取主键 id
+7. `mysql_num_rows` 结果集中行的数目
+8. `mysql_result` 返回结果集中一个字段的值
+9. `mysql_affected_rows` 受影响的记录行数

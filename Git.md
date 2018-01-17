@@ -21,7 +21,6 @@ git init
 ```
 就创建了一个版本库，会生成一个 .git 的目录
 
-
 4. 可以在版本库中新建一个 readme.txt 文件，并把文件添加到仓库：  
 ```
 git add readme.txt
@@ -88,5 +87,9 @@ git remote add origin git@github.com:wscfan/myweb.git
 ```
 git push origin master
 ```
-
 ![](http://image.beekka.com/blog/2014/bg2014061202.jpg)
+
+16. 获取远程库与本地同步合并（如果远程库不为空必须做这一步，否则后面的提交会失败）
+```
+git pull --rebase origin master
+```
