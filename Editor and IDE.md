@@ -34,3 +34,10 @@ Widow => Preferences => General => Workspace
 2. SideBarEnhancements 右键菜单增强插件
 3. AutoFilename 文件路径提示
 4. HTML/CSS/JS Prettify 格式化代码
+
+
+## 4、VI编辑器
+### 4.1 操作模式
+1. Command Mode 命令模式
+2. Insert Mode 输入模式
+3. Last Line Mode 底行模式
