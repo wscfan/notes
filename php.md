@@ -1143,3 +1143,29 @@ var_dump($row);
 7. `mysql_num_rows` 结果集中行的数目
 8. `mysql_result` 返回结果集中一个字段的值
 9. `mysql_affected_rows` 受影响的记录行数
+
+
+## 四、MySQLi扩展库
+### 1、MySQLi基于面向对象的编程
+```php
+// 1. 建立 MySQL 连接
+$mysqli = @new mysqli('localhost', 'root', '123456', 'ws');
+if ($mysqli->connect_errno) {
+	die('Connect Error:' . $mysqli->connect_error);
+}
+
+// 2. 设置默认客户端的编码方式
+$mysqli->set_charset('utf8');
+
+// 3. 执行 SQL 查询
+$sql = <<<EOF
+	CREATE TABLE IF NOT EXISTS mysqli(
+		id TINYINT UNSIGNED AUTO_INCREMENT KEY,
+		username VARCHAR(20) NOT NULL
+	);
+EOF;
+$mysqli->query($sql);
+
+// 关闭连接
+$mysqli->close();
+```
