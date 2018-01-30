@@ -1169,3 +1169,68 @@ $mysqli->query($sql);
 // 关闭连接
 $mysqli->close();
 ```
+多条 SQL 语句的执行：
+```php
+$res = $mysqli->multi_query($sql);
+```
+
+
+## 五、PHP实现验证码制作
+### 1、实现验证码底图
+方法：
+```php
+resource imagecreatetruecolor(int $width, int $height)
+```
+注意事项：
+&emsp;a) 依赖GD扩展
+&emsp;b) 输出图片前，必须提前输出图片header信息
+&emsp;c) 该方法默认输出为黑色背景
+```php
+$image = imagecreatetruecolor(100, 30);
+$bgcolor = imagecolorallocate($image, 255, 255, 255);
+imagefill($image, 0, 0, $bgcolor);
+
+header('content-type: image/png');
+imagepng($image);
+
+imagedestory($image);
+```
+
+### 2、实现数字验证码
+方法：
+```php
+int imagecolorallocate(resource $image, int $red, int $green, int $blue)
+bool imagestring(resource $image, int $font, int $x, int $y, string $s, int $color)
+```
+注意事项：
+&emsp;控制好字体大小与分布，避免字体重叠或显示不全
+```php
+for ($i=0; $i<4; $i++) {
+	$fontsize = 6;
+	$fontcolor = imagecolorallocate($image, rand(0, 150), rand(0, 150), rand(0, 150));
+	$fontcotent = rand(0, 9);
+	$x = ($i*100/4) + rand(0, 10);
+	$y = rand(0, 20);
+	imagestring($image, $fontsize, $x, $y, $fontcotent, $fontcolor);
+}
+```
+
+### 3、增加干扰元素
+方法：
+```php
+bool imagesetpixel(resource $image, int $x, int $y, int $color)
+bool imageline(resource $image, int $x1, int $x2, int $y1, int $y2, int $color)
+```
+注意事项：
+&emsp;干扰信息一定控制好颜色，避免“喧宾夺主”。
+```php
+for ($i=0; $i<200; $i++) {
+	$pointcolor = imagecolorallocate($image, rand(100, 250), rand(100, 250), rand(100, 250));
+	imagesetpixel($image, rand(1, 100), rand(1, 30), $pointcolor);
+}
+
+for ($i=0; $i<3; $i++) {
+	$linecolor = imagecolorallocate($image, rand(80, 220), rand(80, 220), rand(80, 220));
+	imageline($image, rand(1, 100), rand(1, 30), rand(1, 100), rand(1, 30), $linecolor);
+}
+```
