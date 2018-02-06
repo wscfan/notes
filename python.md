@@ -201,3 +201,17 @@ def reversed_cmp(x, y):
 sorted([23, 45, 13, 38, 49], reversed_cmp)
 # [49, 45, 38, 23, 13]
 ```
+
+## 12、导入模块
+python 使用 import 语句导入一个模块。
+```python
+import math
+```
+如果只希望导入用到的几个函数，可以用下面的语句：
+```python
+from math import pow, sin, log
+```
+给函数起别名
+```python
+from logging import log as logger
+```
