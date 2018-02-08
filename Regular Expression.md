@@ -11,3 +11,13 @@
 ```
 /(?:Mark).(ok)/
 ```
+
+**3. 前瞻后顾**
+
+|名称|正则|含义|
+|----|----|----|
+|正向前瞻|exp(?=assert)|&nbsp;|
+|负向前瞻|exp(?!assert)|&nbsp;|
+|正向后顾|exp(?<=assert)|Javascript不支持|
+|负向后顾|exp(?<!assert)|Javascript不支持|
+
