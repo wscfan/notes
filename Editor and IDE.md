@@ -34,6 +34,7 @@ Widow => Preferences => General => Workspace
 2. SideBarEnhancements 右键菜单增强插件
 3. AutoFilename 文件路径提示
 4. HTML/CSS/JS Prettify 格式化代码
+5. editorconfig 代码规范插件
 
 
 ## 4、VI编辑器
