@@ -1234,3 +1234,13 @@ for ($i=0; $i<3; $i++) {
 	imageline($image, rand(1, 100), rand(1, 30), rand(1, 100), rand(1, 30), $linecolor);
 }
 ```
+
+### 4、通过SESSION储存验证信息
+在服务器端记录验证码信息，便于用户输入后做校验。
+方法：
+```php
+bool session_start(void)
+```
+注意事项：
+&emsp;a) session_start() 必须处于脚本最顶端；
+&emsp;b) 多服务器情况下，需要考虑集中管理session信息。
