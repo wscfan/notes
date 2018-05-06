@@ -37,6 +37,7 @@ Widow => Preferences => General => Workspace
 5. SFTP 代码上传服务器
 6. EditorConfig 代码风格统一
 7. jsFormat Js打码格式化
+8. vue-syntax-highlight Vue语法高亮显示
 
 
 ## 4、VI编辑器
