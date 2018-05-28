@@ -38,7 +38,7 @@ Widow => Preferences => General => Workspace
 6. EditorConfig 代码风格统一
 7. jsFormat Js打码格式化
 8. vue-syntax-highlight Vue语法高亮显示
-
+9. editorconfig 代码规范插件
 
 ## 4、VI编辑器
 ### 4.1 操作模式
