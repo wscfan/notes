@@ -5,3 +5,8 @@
 ```
 vue init mpvue/mpvue-quickstart my-project
 ```
+scss安装
+```
+npm install node-sass --save-dev
+npm install sass-loader --save-dev
+```
