@@ -42,20 +42,21 @@
   
   for file in os.scandir('D:/mycode/'):
       print(file.name, file.path, file.is_dir())
-```
-  
-**练习：**  列出当前目录包含hello字符串的文件的个数（不区分大小写）
-  
+  ```
++ **练习：** 列出当前目录包含hello字符串的文件的个数（不区分大小写） 
+
   ```python
   import os
   
   num = 0
   for file in os.scandir('./'):
-      if not file.is_dir():
-          if 'hello' in file.name.lower():
-              num += 1
+  if not file.is_dir():
+  if 'hello' in file.name.lower():
+  num += 1
   print("包含hello的文件个数：", num)
   ```
+
+  
 
 ### 2、遍历、搜索文件及查询文件信息
 
