@@ -35,7 +35,7 @@
       print(file, os.path.isdir(file))
   ```
 
-+ `os.scandir()` 遍历 **(更推荐)** 
++ `os.scandir()` 查找文件**(更推荐)** 
 
   ```python
   import os
@@ -50,9 +50,9 @@
   
   num = 0
   for file in os.scandir('./'):
-  if not file.is_dir():
-  if 'hello' in file.name.lower():
-  num += 1
+      if not file.is_dir():
+          if 'hello' in file.name.lower():
+          num += 1
   print("包含hello的文件个数：", num)
   ```
 
@@ -193,6 +193,206 @@
   ```
 
 ### 4、批量创建、复制、移动、删除、重命名文件及文件夹
+
++ 创建文件夹
+
+  ```python
+  import os
+  
+  if not os.path.exists('dirname'):
+  	os.mkdir('dirname')
+  ```
+
++ 创建多层文件夹
+
+  ```python
+  import os
+  os.makedirs('aa/bb/cc')
+  ```
+
++ 复制文件
+
+  ```python
+  import shutil
+  
+  shutil.copy('test.txt', './aa/test.txt')
+  shutil.copy('test.txt', './aa/new_test.txt')
+  ```
+
++ 复制文件夹 (新文件夹不能已经存在)
+
+  ```python
+  import shutil
+  shutil.copytree('aa/', 'dd/')
+  ```
+
++ 移动文件或者文件夹
+
+  ```python
+  import shutil
+  
+  shutil.move('test.txt', 'bb/')
+  shutil.move('test.txt', 'bb/new_test.txt')
+  shutil.move('aa/', 'bb/')
+  ```
+
++ 重命名文件或文件夹
+
+  ```python
+  import os
+  
+  os.rename('test.txt', 'new_test.txt')
+  os.rename('aa/', 'new_aa/')
+  ```
+
++ 删除文件
+
+  ```python
+  import os
+  os.remove('test.txt')
+  ```
+
++ 删除文件夹
+
+  ```python
+  import shutil
+  shutil.rmtree('aa/')
+  ```
+
++ **练习：** 找出当前文件夹中所有.zip文件，并加上该文件最后修改日期重命名，然后将所有重命名后的文件移动到backup文件夹中。
+
+  ```python
+  import os
+  import datetime
+  import shutil
+  
+  if not os.path.exists('backup'):
+      os.mkdir('backup')
+  for file in os.scandir():
+      if file.name.endswith('.zip'):
+          m_format_time = datetime.datetime.fromtimestamp(os.stat(file.name).st_mtime).strftime('%Y-%m-%d')
+          shutil.move(file.name, 'backup/' + m_format_time + '-' + file.name)
+  ```
+
+### 5、创建和解压压缩包
+
++ 读取压缩包
+
+  ```python
+  import zipfile
+  
+  with zipfile.ZipFile('test.zip', 'r') as zipobj:
+      for file_name in zipobj.namelist():
+          print(file_name)
+  ```
+
++ 读取压缩包内文件的信息
+
+  ```python
+  import zipfile
+  
+  with zipfile.ZipFile('test.zip', 'r') as zipobj:
+      for file_name in zipobj.namelist():
+          info = zipobj.getinfo(file_name)
+          print(file_name, info.file_size, info.compress_size)
+  ```
+
++ 解压压缩包中的单个文件
+
+  ```python
+  import zipfile
+  
+  with zipfile.ZipFile('test.zip', 'r') as zipobj:
+      zipobj.extract('test.txt')
+  ```
+
++ 解压所有文件
+
+  ```python
+  import zipfile
+  
+  with zipfile.ZipFile('test.zip', 'r') as zipobj:
+      zipobj.extractall()
+  ```
+
++ 将有密码的压缩包解压
+
+  ```python
+  import zipfile
+  
+  with zipfile.ZipFile('test.zip', 'r') as zipobj:
+      zipobj.extractall(path='解压/', pwd=b'123456')
+  ```
+
++ 创建压缩包
+
+  ```python
+  import zipfile
+  
+  file_list = ['test1.txt', 'test2.txt', 'test3.txt']
+  with zipfile.ZipFile('compress.zip', 'w') as zipobj:
+      for file in file_list:
+          zipobj.write(file)
+  ```
+
++ 向已有压缩包中添加文件
+
+  ```python
+  import zipfile
+  
+  with zipfile.ZipFile('compress.zip', 'a') as zipobj:
+      zipobj.write('test4.txt')
+  ```
+
++ **练习：** 将当前文件夹所有修改时间在今天之前的文件重命名加上最后修改日期，将所有重命名后的文件都添加到带有今天日期的压缩包里，并将压缩包移动到backup文件夹中，删除原始文件。
+
+  ```python
+  import os
+  import datetime
+  import shutil
+  import zipfile
+  
+  if not os.path.exists('backup'):
+      os.mkdir('backup')
+  if not os.path.exists('temp'):
+      os.mkdir('temp')
+  
+  for file in os.scandir('./'):
+    if not file.is_dir():
+      file_ctime_num = int(datetime.datetime.fromtimestamp(os.stat(file.name).st_mtime).strftime('%Y%m%d'))
+      now_time_num = int(datetime.datetime.now().strftime('%Y%m%d'))
+      if file_ctime_num < now_time_num:
+          file_ctime_format = datetime.datetime.fromtimestamp(os.stat(file.name).st_mtime).strftime('%Y-%m-%d')
+          shutil.move(file.name, './temp/' + file_ctime_format + '-' + file.name)
+  
+  now_date_format = datetime.datetime.now().strftime('%Y-%m-%d')
+  with zipfile.ZipFile('./backup/' + now_date_format + '-compress.zip', 'w') as zipobj:
+      for file in os.listdir('./temp/'):
+          zipobj.write('./temp/' + file)
+  
+  shutil.rmtree('./temp/')
+              
+```
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
