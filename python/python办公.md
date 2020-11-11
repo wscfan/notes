@@ -375,3 +375,99 @@
               zipobj.write(file_name)
               os.remove(file_name)
   ```
+  
+  
+
+## 二、处理 Excel 表格
+
+### 1、python 打开及读取 Excel 表格内容
+
++ 打开Excel表格并获取表格名称
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  print(workbook.sheetnames)
+  ```
+
++ 获取sheet的尺寸范围
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook['Sheet1']
+  print(sheet.dimensions)
+  ```
+
++ 获取某个单元格数值
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet['C1']
+  print(cell.value)
+  ```
+
++ 获取某个单元格的行、列、坐标
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet['C1']
+  print(cell.row, cell.column, cell.coordinate)
+  ```
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet.cell(row=1, column=4)
+  print(cell.row, cell.column, cell.coordinate)
+  ```
+
++ 获取一系列的单元格
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  for row in sheet.iter_rows(min_row=2, max_row=4, min_col=2, max_col=4):
+      for cell in row:
+          print(cell)
+  ```
+
++ 迭代整个表格的所有行
+
+  ```python
+  import openpyxl from load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  for row in sheet.rows:
+      print(row)
+  ```
+
+### 2、python 向 Excel 表格中写入内容
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
