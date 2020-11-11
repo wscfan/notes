@@ -349,86 +349,29 @@
   ```python
   import os
   import datetime
-  import shutil
   import zipfile
+  
+  new_name_list = []
+  now_time_num = int(datetime.datetime.now().strftime('%Y%m%d'))
+  for file in os.scandir():
+      if not (file.is_dir() or file.name.endswith('.py')):
+          file_mtime = os.stat(file.name).st_mtime
+          file_mtime_num = int(datetime.datetime.fromtimestamp(file_mtime).strftime('%Y%m%d'))
+          if file_mtime_num < now_time_num:
+              file_mtime_format = datetime.datetime.fromtimestamp(file_mtime).strftime('%Y-%m-%d')
+              file_new_name = file_mtime_format + '-' + file.name
+              print(file.name, file_mtime_format)
+              os.rename(file.name, file_new_name)
+              new_name_list.append(file_new_name)
   
   if not os.path.exists('backup'):
       os.mkdir('backup')
-  if not os.path.exists('temp'):
-      os.mkdir('temp')
-  
-  for file in os.scandir('./'):
-    if not file.is_dir():
-      file_ctime_num = int(datetime.datetime.fromtimestamp(os.stat(file.name).st_mtime).strftime('%Y%m%d'))
-      now_time_num = int(datetime.datetime.now().strftime('%Y%m%d'))
-      if file_ctime_num < now_time_num:
-          file_ctime_format = datetime.datetime.fromtimestamp(os.stat(file.name).st_mtime).strftime('%Y-%m-%d')
-          shutil.move(file.name, './temp/' + file_ctime_format + '-' + file.name)
-  
-  now_date_format = datetime.datetime.now().strftime('%Y-%m-%d')
-  with zipfile.ZipFile('./backup/' + now_date_format + '-compress.zip', 'w') as zipobj:
-      for file in os.listdir('./temp/'):
-          zipobj.write('./temp/' + file)
-  
-  shutil.rmtree('./temp/')
-              
-```
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  if len(new_name_list) > 0:
+      now_time = datetime.datetime.now()
+      now_date_format = now_time.strftime('%y-%m-%d')
+      compress_name = now_date_format + '-compress.zip'
+      with zipfile.ZipFile('./backup/' + compress_name, 'w') as zipobj:
+          for file_name in new_name_list:
+              zipobj.write(file_name)
+              os.remove(file_name)
+  ```
