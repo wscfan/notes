@@ -447,7 +447,7 @@
 + 迭代整个表格的所有行
 
   ```python
-  import openpyxl from load_workbook
+  from openpyxl import load_workbook
   
   workbook = load_workbook(filename='test.xlsx')
   sheet = workbook.active
@@ -456,6 +456,168 @@
   ```
 
 ### 2、python 向 Excel 表格中写入内容
+
++ 向某个单元格中写入内容并保存
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet['B2'] = 'hello world'
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 插入python列表数据
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  data = [
+      ['张三', 1],
+      ['李四', 2],
+      ['王五', 3]
+  ]
+  for row in data:
+      sheet.append(row)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 插入一列
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.insert_cols(idx=2)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 插入多行
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.insert_rows(idx=2, amount=3)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 删除行
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.delete_rows(idx=2, amount=2)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 移动单元格
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.move_range('A1:B2', cols=2, rows=2)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 创建和删除表格
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  print(workbook.sheetnames)
+  workbook.create_sheet('MySheet')
+  sheet = workbook['Sheet1']
+  workbook.remove(sheet)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 复制表格
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook['MySheet']
+  workbook.copy_worksheet(sheet)
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 修改表格名称
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  workbook['MySheet'].title = 'MyNewSheet'
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 创建新的Excel文件
+
+  ```python
+  from openpyxl import Workbook
+  
+  workbook = Workbook()
+  sheet = workbook.active
+  sheet.title = '表格一'
+  for i in range(1, 10):
+      for j in range(1, 10):
+          sheet.cell(row=i, column=j).value = i * j
+  workbook.save(filename='output.xlsx')
+  ```
+
++ 冻结窗格
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.freeze_panes = 'B2'
+  workbook.save(filename='test.xlsx')
+  ```
+
++ 筛选
+
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.auto_filter.ref = sheet.dimensions
+  workbook.save(filename='test.xlsx')
+  ```
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
