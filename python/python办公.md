@@ -599,33 +599,157 @@
   workbook.save(filename='test.xlsx')
   ```
 
++ 修改字体样式
+
+  ```python
+  from openpyxl.styles import Font
+  from openpyxl import load_workbook
   
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet['A2']
+  cell.font = Font(name='微软雅黑', size=12, italic=True, bold=True, color='ff0000')
+  workbook.save(filename='test.xlsx')
+  ```
 
++ 获取表格中字体的样式
 
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet['B2']
+  font = cell.font
+  print(font.name, font.size, font.italic, font.bold)
+  ```
 
++ 设置对其样式
 
+  `wrap_text` 是否自动换行
 
+  ```python
+  from openpyxl import load_workbook
+  from openpyxl.styles import Alignment
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet['B2']
+  cell.value = '锄禾日当午，汗滴禾下土。'
+  alignment = Alignment(horizontal='center', vertical='center', text_rotation=45)
+  cell.alignment = alignment
+  workbook.save(filename='test.xlsx')
+  ```
 
++ 单元格边框设置
 
+  ```python
+  from openpyxl import load_workbook
+  from openpyxl.styles import Border,Side
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell = sheet['C3']
+  side1 = Side(style='thin', color='FF0000')
+  side2 = Side(style='dashed', color='0000FF')
+  border = Border(left=side1, right=side1, top=side2, bottom=side2)
+  cell.border = border
+  workbook.save(filename='test.xlsx')
+  ```
 
++ 设置填充样式
 
+  ```python
+  from openpyxl import load_workbook
+  from openpyxl.styles import PatternFill, GradientFill
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  cell_d4 = sheet['D4']
+  pattern_fill = PatternFill(fill_type='solid', fgColor='FF0000')
+  cell_d4.fill = pattern_fill
+  cell_e5 = sheet['E5']
+  gradient_fill = GradientFill(stop=('FF0000', '00FF00', '0000FF'))
+  cell_e5.fill = gradient_fill
+  workbook.save(filename='test.xlsx')
+  ```
 
++ 设置行高和列宽
 
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.row_dimensions[1].height = 50
+  sheet.column_dimentsions['A'].width = 50
+  workbook.save(filename='test.xlsx')
+  ```
 
++ 合并单元格
 
+  ```python
+  from openpyxl import load_workbook
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  sheet.merge_cells('A1:B2')
+  sheet.merge_cells(start_row=5, end_row=7, start_column=5, end_column=7)
+  workbook.save(filename='test.xlsx')
+  ```
 
+  取消合并单元格 `unmerge_cells` 
 
++ 插入图片
 
+  ```python
+  from openpyxl import load_workbook
+  from openpyxl.drawing.image import Image
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  logo = Image('logo.png')
+  logo.width = 100
+  logo.height = 50
+  sheet.add_image(logo, 'C1')
+  workbook.save(filename='test.xlsx')
+  ```
 
++ 插入柱状图
 
+  ```python
+  from openpyxl import load_workbook
+  from openpyxl.chart import BarChart, Reference
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  chart = BarChart()
+  data = Reference(worksheet=sheet, min_row=1, max_row=6, min_col=2, max_col=6)
+  categories = Reference(sheet, min_col=1, min_row=2, max_row=6)
+  chart.add_data(data, titles_from_data=True)
+  chart.set_categories(categories)
+  sheet.add_chart(chart, 'A7')
+  workbook.save('test.xlsx')
+  ```
 
++ 插入条形图
 
+  ```python
+  from openpyxl import load_workbook
+  from openpyxl.chart import LineChart, Reference
+  
+  workbook = load_workbook(filename='test.xlsx')
+  sheet = workbook.active
+  chart = LineChart()
+  data = Reference(worksheet=sheet, min_row=1, max_row=6, min_col=2, max_col=6)
+  categories = Reference(sheet, min_col=1, min_row=2, max_row=6)
+  chart.add_data(data, from_rows=True, titles_from_data=True)
+  chart.set_categories(categories)
+  sheet.add_chart(chart, 'A7')
+  workbook.save('test.xlsx')
+  ```
 
-
-
-
-
-
+  
 
 
 
