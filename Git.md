@@ -141,7 +141,15 @@ git pull --rebase origin master
   git stash pop
   ```
 
++ 复制特定的提交到当前分支
+
+  ```
+  git cherry-pick f1b0
+  ```
+
   
+
+
 
 
 
