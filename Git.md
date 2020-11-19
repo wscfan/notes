@@ -218,17 +218,21 @@ git pull --rebase origin master
   git push origin :refs/tags/v1.0
   ```
 
++ 查看远程版本库
+
+  ```
+  git remote -v
+  ```
+
++ 关联多个远程版本库
+
+  1. 删除已关联的名为 `origin` 的远程库
+  2. 关联远程库，用不同的名字区分
+
+  ```
+  git remote rm origin
+  git remote add github git@github.com:wscfan/notes.git
+  git remote add gitee git@gitee.com:wscfan/notes.git
+  ```
+
   
-
-
-
-
-
-
-
-
-
-
-
-
-
