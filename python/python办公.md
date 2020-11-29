@@ -749,7 +749,69 @@
   workbook.save('test.xlsx')
   ```
 
+## 三、处理 PDF 文件
+
+### 1、提取PDF文字内容
+
++ 使用 pdfplumber 提取文字
+
+  ```python
+  import pdfplumber
   
+  with pdfplumber.open('test.pdf') as pdf:
+      first_page = pdf.pages[0]
+      print(first_page.extract_text())
+  ```
+
++ 使用 pdfplumber 提取单个简单表格
+
+  ```python
+  import pdfplumber
+  
+  with pdfplumber.open('test.pdf') as pdf:
+      first_page = pdf.pages[0]
+      table = first_page.extract_table()
+      print(table)
+  ```
+
++ 使用 pdfplumber 提取多个简单表格
+
+  ```python
+  import pdfplumber
+  
+  with pdfplumber.open('test.pdf') as pdf:
+      table_page = pdf.pages[0]
+      for table in table_page.extract_tables():
+          print(table)
+  ```
+
++ 提取表格时设定参数
+
+  ```python
+  import pdfplumber
+  
+  with pdfplumber.open('test.pdf') as pdf:
+      table_page = pdf.pages[0]
+      table = table_page.extract_table(
+      	table_settings={
+              "vertical_strategy": "text",
+              "horizontal_strategy": "text"
+          }
+      )
+      print(table)
+  ```
+
+  
+
+
+
+
+
+
+
+
+
+
 
 
 
