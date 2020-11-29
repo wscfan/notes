@@ -141,11 +141,98 @@ git pull --rebase origin master
   git stash pop
   ```
 
++ 复制特定的提交到当前分支
+
+  ```
+  git cherry-pick f1b0
+  ```
+
++ 删除分支、强制删除分支
+
+  ```
+  git branch -d dev
+  git branch -D dev
+  ```
+
++ 创建本地dev分支并同步远程dev分支
+
+  ```
+  git checkout -b dev origin/dev
+  ```
+
++ 设置dev和origin/dev的链接
+
+  ```
+  git branch --set-upstream-to=origin/dev dev
+  ```
+
++ 打标签、查看标签
+
+  ```
+  git tag v1.0
+  git tag
+  ```
+
++ 给某次提交打标签
+
+  ```
+  git tab v1.0 52cddb6
+  ```
+
++ 查看某个标签对应提交的内容的修改
+
+  ```
+  git show v1.0
+  ```
+
++ 创建带有说明的标签
+
+  ```
+  git tag -a v1.0 -m 'released version' 52cddb6
+  ```
+
++ 删除标签
+
+  ```
+  git tag -d v1.0
+  ```
+
++ 推送某个标签到远程
+
+  ```
+  git push origin v1.0
+  ```
+
++ 推送所有尚未推送到远程的本地标签
+
+  ```
+  git push origin --tags
+  ```
+
++ 删除远程标签
+
+  先删除本地标签，再删除远程标签
+
+  ```
+  git tag -d v1.0
+  git push origin :refs/tags/v1.0
+  ```
+
++ 查看远程版本库
+
+  ```
+  git remote -v
+  ```
+
++ 关联多个远程版本库
+
+  1. 删除已关联的名为 `origin` 的远程库
+  2. 关联远程库，用不同的名字区分
+
+  ```
+  git remote rm origin
+  git remote add github git@github.com:wscfan/notes.git
+  git remote add gitee git@gitee.com:wscfan/notes.git
+  ```
+
   
-
-
-
-
-
-
-
