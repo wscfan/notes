@@ -801,15 +801,107 @@
       print(table)
   ```
 
++ 使用 pypdf2 分割 pdf
+
+  ```python
+  from PyPDF2 import PdfFileReader, PdfFileWriter
   
+  pdf_reader = PdfFileReader('test.pdf')
+  for page in range(pdf_reader.getNumPages()):
+      pdf_writer = PdfFileWriter()
+      pdf_writer.addPage(pdf_reader.getPage(page))
+      with open(f'./分割后的PDF文件/divide_page{page}.pdf', 'wb') as out:
+          pdf_writer.write(out)
+  ```
 
++ 使用 pypdf2 合并 pdf
 
+  ```python
+  from PyPDF2 import PdfFileReader, PdfFileWriter
+  
+  pdf_writer = PdfFileWriter()
+  for page in range(2):
+      pdf_reader = PdfFileReader(f'./分割后的PDF文件/divide_page{page}.pdf')
+      for page_num in range(pdf_reader.getNumPages()):
+          pdf_writer.addPage(pdf_reader.getPage(page_num))
+  
+  with open('merge.pdf', 'wb') as out:
+      pdf_writer.write(out)
+  ```
 
++ 使用 pypdf2 旋转 pdf 页面
 
+  ```python
+  from PyPDF2 import PdfFileReader, PdfFileWriter
+  
+  pdf_reader = PdfFileReader('test.pdf')
+  pdf_writer = PdfFileWriter()
+  for num in range(pdf_reader.getNumPages()):
+      if num % 2 == 0:
+          page = pdf_reader.getPage(num).rotateClockwise(90)
+          pdf_writer.addPage(page)
+      else:
+          page = pdf_reader.getPage(num).rotateCounterClockwise(90)
+          pdf_writer.addPage(page)
+  
+  with open('rotateTest.pdf', 'wb') as out:
+      pdf_writer.write(out)
+  ```
 
++ 使用 pypdf2 给 pdf 加水印
 
+  ```python
+  from PyPDF2 import PdfFileReader, PdfFileWriter
+  from copy import copy
+  
+  watermark_pdf = PdfFileReader('watermark.pdf')
+  watermark_page = watermark_pdf.getPage(0)
+  
+  pdf_reader = PdfFileReader('test.pdf')
+  pdf_writer = PdfFileWriter()
+  
+  for page in range(pdf_reader.getNumPages()):
+    original_page = pdf_reader.getPage(page)
+    new_page = copy(watermark_page)
+    new_page.mergePage(original_page)
+    pdf_writer.addPage(new_page)
+  
+  with(open('watermarkFile.pdf', 'wb')) as out:
+    pdf_writer.write(out)
+  ```
 
++ 使用 pypdf2 加密 pdf 文件
 
+  ```python
+  from PyPDF2 import PdfFileReader, PdfFileWriter
+  
+  pdf_reader = PdfFileReader("test.pdf")
+  pdf_writer = PdfFileWriter()
+  for page in range(pdf_reader.getNumPages()):
+      pdf_writer.addPage(pdf_reader.getPage(page))
+  
+  pdf_writer.encrypt("123456")
+  with open('test_encrypt.pdf', 'wb') as out:
+      pdf_writer.write(out)
+  ```
+
++ 使用 pypdf2 解密 pdf 文件
+
+  ```python
+  from PyPDF2 import PdfFileReader, PdfFileWriter
+  
+  pdf_reader = PdfFileReader('test_encrypt.pdf')
+  pdf_reader.decrypt("123456")
+  pdf_writer = PdfFileWriter()
+  
+  for page in range(pdf_reader.getNumPages()):
+      pdf_writer.addPage(pdf_reader.getPage(page))
+  
+  with open('test_decrypt.pdf', 'wb') as out:
+      pdf_writer.write(out)
+  ```
+
+  
 
 
 
