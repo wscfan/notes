@@ -903,9 +903,32 @@
 
   
 
+## 四、处理Word
 
+### 1、python读取Word文档内容
 
++ 读取内容
 
+  ```python
+  from docx import Document
+  
+  doc = Document('test.docx')
+  for paragraph in doc.paragraphs:
+    print(paragraph.text)
+  ```
+
++ 读取文字块
+
+  ```python
+  from docx import Document
+  
+  doc = Document('test.docx')
+  for paragraph in doc.paragraphs:
+    for run in paragraph.runs:
+      print(run.text)
+  ```
+
+  
 
 
 
