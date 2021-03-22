@@ -928,7 +928,79 @@
       print(run.text)
   ```
 
++ 添加标题、段落
+
+  ```python
+  from docx import Document
   
+  doc = Document()
+  doc.add_heading('一级标题', level=1)
+  paragraph1 = doc.add_paragraph('这是第一段段落。')
+  paragraph2 = doc.add_paragraph()
+  paragraph2.add_run('加粗').bold = True
+  paragraph2.add_run('普通')
+  paragraph2.add_run('斜体').italic = True
+  doc.save('test.docx')
+  ```
+
++ 添加分页
+
+  ```python
+  from docx import Document
+  
+  doc = Document()
+  doc.add_heading("第一页", level=2)
+  doc.add_paragraph("第一页内容")
+  doc.add_page_break()
+  doc.add_heading("第二页", level=3)
+  doc.add_paragraph("第二页内容")
+  doc.save("test2.docx")
+  ```
+
++ 添加图片
+
+  ```python
+  from docx import Document
+  from docx.shared import Cm
+  
+  doc = Document()
+  doc.add_picture("test.jpg")
+  doc.add_picture("test.jpg", width=Cm(5))
+  doc.add_picture("test.jpg", width=Cm(5), height=Cm(8))
+  doc.save("test3.docx")
+  ```
+
++ 添加表格
+
+  ```python
+  from docx import Document
+  
+  records = [
+    ['学号', '姓名', '成绩'],
+    [101, '张三', 99],
+    [102, '李四', 96],
+    [103, '王五', 98]
+  ]
+  
+  doc = Document()
+  table = doc.add_table(rows=4, cols=3)
+  for row in range(4):
+    cells = table.rows[row].cells
+    for col in range(3):
+      cells[col].text = str(records[row][col])
+  
+  doc.save('test4.docx')
+  ```
+
+  
+
+
+
+
+
+
+
+
 
 
 
