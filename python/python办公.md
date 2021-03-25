@@ -905,7 +905,7 @@
 
 ## 四、处理Word
 
-### 1、python读取Word文档内容
+### 1、Python读取Word文档内容
 
 + 读取内容
 
@@ -927,6 +927,8 @@
     for run in paragraph.runs:
       print(run.text)
   ```
+
+### 2、Python写入Word文档内容
 
 + 添加标题、段落
 
@@ -992,7 +994,80 @@
   doc.save('test4.docx')
   ```
 
+### 3、Word文档内容编辑
+
++ 文字样式的修改
+
+  ```python
+  from docx import Document
+  from docx.shared import Pt, RGBColor
+  from docx.oxml.ns import qn
   
+  doc = Document("test.docx")
+  for paragraph in doc.paragraphs:
+  	for run in paragraph.runs:
+  		run.font.bold = True
+  		run.font.italic = True
+  		run.font.underline = True
+  		run.font.strike = True
+  		run.font.shadow = True
+  		run.font.size = Pt(20)
+  		run.font.color.rgb = RGBColor(255, 0, 0)
+  		run.font.name = '微软雅黑'
+  		r = run._element.rPr.rFonts
+  		r.set(qn('w:eastAsia'), '微软雅黑')
+  
+  doc.save("test_modified.docx")
+  ```
+
++ 段落对齐
+
+  ```python
+  from docx import Document
+  from docx.enum.text import WD_ALIGN_PARAGRAPH
+  
+  doc = Document('test.docx');
+  for paragraph in doc.paragraphs:
+  	paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+  
+  doc.save('test_modified.docx')
+  ```
+
++ 段落行间距
+
+  ```python
+  from docx import Document
+  from docx.enum.text import WD_ALIGN_PARAGRAPH
+  
+  doc = Document('test.docx')
+  for paragraph in doc.paragraphs:
+  	paragraph.paragraph_format.line_spacing = 2.0
+  
+  doc.save('test_modified.docx')
+  ```
+
++ 段前段后间距
+
+  ```python
+  from docx import Document
+  from docx.enum.text import WD_ALIGN_PARAGRAPH
+  from docx.shared import Pt
+  
+  doc = Document('test.docx')
+  for paragraph in doc.paragraphs:
+  	paragraph.paragraph_format.space_before = Pt(12)
+  	paragraph.paragraph_format.space_after = Pt(12)
+  
+  doc.save('test_modified.docx')
+  ```
+
+  
+
+
+
+
+
+
 
 
 
