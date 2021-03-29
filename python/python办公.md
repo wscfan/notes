@@ -903,7 +903,7 @@
 
   
 
-## 四、处理Word
+## 四、处理Word文件
 
 ### 1、Python读取Word文档内容
 
@@ -1061,7 +1061,45 @@
   doc.save('test_modified.docx')
   ```
 
+
+
+## 五、处理PPT文件
+
+### 1、Python读取PPT
+
++ 读取PPT文字
+
+  ```python
+  from pptx import Presentation
   
+  prs = Presentation('test.pptx')
+  for slide in prs.slides:
+    for shape in slide.shapes:
+      if shape.has_text_frame:
+        text_frame = shape.text_frame
+        print(text_frame.text)
+  ```
+
++ 读取PPT段落
+
+  ```python
+  from pptx import Presentation
+  
+  prs = Presentation('test.pptx')
+  for slide in prs.slides:
+    for shape in slide.shapes:
+      text_frame = shape.text_frame
+      for paragraph in text_frame.paragraphs:
+        print(paragraph.text)
+  ```
+
+  
+
+
+
+
+
+
 
 
 
