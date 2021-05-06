@@ -1093,4 +1093,49 @@
         print(paragraph.text)
   ```
 
+### 2、Python写入PPT
+
++ 获取PPT模板信息并导出到新PPT中
+
+  ```python
+  from pptx import Presentation
   
+  prs = Presentation('模板.pptx')
+  slide = prs.slides.add_slide(prs.slide_layouts[0])
+  for shape in slide.placeholders:
+    phf = shape.placeholder_format
+    print(f'{phf.idx}--${shape.name}--{phf.type}')
+    shape.text = f'{phf.idx}***{phf.type}'
+  
+  prs.save('output.pptx')
+  ```
+
++ 根据模板往PPT中添加内容
+
+  ```python
+  from pptx import Presentation
+  from datetime import datetime
+  
+  prs = Presentation('奖学金证书模板.pptx')
+  title_slide_layout = prs.slide_layouts[0]
+  slide = prs.slides.add_slide(title_slide_layout)
+  
+  winner_name = slide.placeholders[0]
+  certificate_type = slide.placeholders[1]
+  prefix_info = slide.placeholders[20]
+  suffix_info = slide.placeholders[19]
+  award_presenter = slide.placeholders[17]
+  award_date = slide.placeholders[21]
+  
+  winner_name.text = '张三'
+  certificate_type.text = '三好学生奖状'
+  prefix_info.text = '兹证明'
+  suffix_info.text = '品德优秀'
+  award_presenter.text = '李老师'
+  award_date.text = str(datetime.now().date())
+  
+  prs.save('output.pptx')
+  ```
+
+  
+
