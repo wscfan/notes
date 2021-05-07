@@ -1137,5 +1137,106 @@
   prs.save('output.pptx')
   ```
 
-  
++ PPT添加段落、设置层级关系
 
+  ```python
+  from pptx import Presentation
+  
+  prs = Presentation()
+  slide = prs.slides.add_slide(prs.slide_layouts[1])
+  shapes = slide.shapes
+  title_shape = shapes.title
+  body_shape = shapes.placeholders[1]
+  
+  title_shape.text = '添加项目符号列表页'
+  
+  tf = body_shape.text_frame
+  tf.text = '带圆点的项目符号行1'
+  
+  p = tf.add_paragraph()
+  p.text = '带圆点的项目符号行2'
+  p.level = 1
+  
+  p = tf.add_paragraph()
+  p.text = '带圆点的项目符号行3'
+  p.level = 2
+  
+  prs.save('output.pptx')
+  ```
+
++ PPT添加文本框
+
+  ```python
+  from pptx import Presentation
+  from pptx.util import Cm,Pt
+  
+  psr = Presentation()
+  slide = psr.slides.add_slide(psr.slide_layouts[6])
+  
+  left = top = width = height = Cm(3)
+  text_box = slide.shapes.add_textbox(left, top, width, height)
+  tf = text_box.text_frame
+  tf.text = '这是一段文本框的文字'
+  
+  p = tf.add_paragraph()
+  p.text = '这是第二段文字，加粗，字号40'
+  p.font.bold = True
+  p.font.size = Pt(40)
+  
+  psr.save('output.pptx')
+  ```
+
++ PPT添加图片
+
+  ```python
+  from pptx import Presentation
+  from pptx.util import Cm
+  
+  psr = Presentation()
+  slide = psr.slides.add_slide(psr.slide_layouts[6])
+  
+  left = top = Cm(3)
+  slide.shapes.add_picture('img.png', left, top)
+  
+  left = Cm(10)
+  top = Cm(10)
+  height = Cm(2)
+  slide.shapes.add_picture('img.png', left, top, height=height)
+  
+  psr.save('output.pptx')
+  ```
+
++ PPT添加表格
+
+  ```python
+  from pptx import Presentation
+  from pptx.util import Cm
+  
+  prs = Presentation()
+  slide = prs.slides.add_slide(prs.slide_layouts[6])
+  
+  rows, cols = 4, 2
+  left = top = Cm(5)
+  width = Cm(18)
+  height = Cm(3)
+  
+  table = slide.shapes.add_table(rows, cols, left, top, width, height).table
+  
+  table.columns[0].width = Cm(6)
+  table.columns[1].width = Cm(4)
+  table.rows[0].height = Cm(2)
+  
+  data = [
+    ['姓名', '成绩'],
+    ['张三', 98],
+    ['李四', 89],
+    ['王五', 80]
+  ]
+  for row in range(rows):
+    for col in range(cols):
+      table.cell(row, col).text = str(data[row][col])
+  
+  prs.save('output.pptx')
+  ```
+
+  
