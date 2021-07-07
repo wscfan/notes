@@ -1240,3 +1240,25 @@
   ```
 
   
+
+## 六、发送邮件
+
+### 1、使用yagmail发送邮件
+
++ 可以先使用python命令行在本地注册邮箱密码。这样在代码中就可以不写密码。
+
+```bash
+import yagmail
+yagmail.register('test@163.com', 'test123')
+```
+
+```python
+import yagmail
+
+yag = yagmail.SMTP(user='test@163.com', host='smtp.163.com')
+contents = ['这是第一段内容', '这是第二段内容']
+yag.send('sendTo@qq.com', '测试邮件标题', contents)
+```
+
+
+
