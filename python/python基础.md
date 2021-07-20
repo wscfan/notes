@@ -1,4 +1,4 @@
-# python笔记
+# python基础
 
 ## 1、tuple 元组
 tuple 一旦创建完毕，就不能修改。
