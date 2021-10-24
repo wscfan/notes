@@ -1247,18 +1247,68 @@
 
 + 可以先使用python命令行在本地注册邮箱密码。这样在代码中就可以不写密码。
 
+```dos
+pip install yagmail
+pip install keyring
+```
+
 ```bash
 import yagmail
-yagmail.register('test@163.com', 'test123')
+yagmail.register('test@163.com', '授权码')
 ```
 
 ```python
 import yagmail
 
 yag = yagmail.SMTP(user='test@163.com', host='smtp.163.com')
-contents = ['这是第一段内容', '这是第二段内容']
+contents = ['这是第一段内容',
+            '这是第二段内容',
+            '<a href="http://www.baidu.com">这是一段链接</a>',
+            yagmail.inline('图片路径'),  # 嵌入邮件中的图片
+            'test.png']
 yag.send('sendTo@qq.com', '测试邮件标题', contents)
 ```
 
+### 2、群发邮件
 
+```python
+import yagmail
 
+yag = yagmail.SMTP(user='test@163.com', host='smtp.163.com')
+contents = ['这是第一段内容']
+yag.send(['sendTo@qq.com', 'sendTo2@qq.com'], '群发邮件标题', contents)
+```
+
+### 3、定时发邮件
+
+```python
+import yagmail
+import schedule
+import time
+
+def send_email():
+  yag = yagmail.SMTP(user='test@163.com', host='smtp.163.com')
+  contents = ['这是第一段内容']
+  yag.send('sendTo@qq.com', '邮件标题', contents)
+
+schedule.every(2).minutes.do(send_email)
+
+while True:
+  schedule.run_pending()
+  time.sleep(1)
+```
+
+### 4、接收邮件
+
+```python
+from imbox import Imbox
+import keyring
+
+password = keyring.get_password('yagmail', 'test@163.com')
+
+with Imbox('imap.163.com', 'test@163.com', password, ssl=True) as imbox:
+  all_inbox_messages = imbox.messages()
+  for uid, message in all_inbox_messages:
+    print(message.subject)
+    print(message.body['plain'])
+```
