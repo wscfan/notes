@@ -43,7 +43,7 @@ npm install <Module Name>
 如果出现以下错误：  
 ```dos
 npm err! Error: connect ECONNREFUSED 127.0.0.1:8087
-```  
+```
 解决办法：
 ```dos
 npm config set proxy null
