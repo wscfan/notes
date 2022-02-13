@@ -24,3 +24,31 @@ export const SelfLink = styled.div`
     border: 3px solid #ccc;
 `;
 ```
+
+### react-transiton-group
+
+react动画库
+
+**安装：**
+
+```bash
+npm i react-transition-group -S
+```
+
+### redux-thunk
+
+用于异步操作的中间件
+
+**用法：**
+
+```js
+const store = createStore(
+  reducer,
+  applyMiddleware(thunk, logger)
+);
+```
+
+### redux-logger
+
+用户日志记录的中间件
+
