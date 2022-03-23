@@ -166,6 +166,11 @@ git pull --rebase origin master
   git branch --set-upstream-to=origin/dev dev
   ```
 
++ 强制修改分支位置
+
+  ```
+  git branch -f dev HEAD~3
+
 + 打标签、查看标签
 
   ```
