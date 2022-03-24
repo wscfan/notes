@@ -13,7 +13,7 @@ ssh-keygen -t rsa -C "email@example.com"
 ```
 在当前用户的根目录下生成 `.ssh` 目录，目录里边有两个文件 `id_rsa` 和 `id_rsa.pub` ,打开 `id_rsa.pub` 文件，将里边的公钥添加到 github 上即可。  
 
-## 二、git命令
+## 二、git常用命令
 
 1. 创建一个空目录，进入并执行下面代码：  
 
@@ -170,6 +170,14 @@ git pull --rebase origin master
 
   ```
   git branch -f dev HEAD~3
+  ```
+
+
++ 将指定提交应用于其他分支
+
+  ```
+  git cherry-pick <HashA> <HashB>
+  ```
 
 + 打标签、查看标签
 
