@@ -248,4 +248,11 @@ git pull --rebase origin master
   git remote add gitee git@gitee.com:wscfan/notes.git
   ```
 
++ 在已关联的远程库上添加新的远程库
+
+  ```bash
+  git remote set-url --add origin git@github.com:wscfan/notes.git
+  ```
+
   
+
