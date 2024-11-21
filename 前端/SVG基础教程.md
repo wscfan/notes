@@ -97,8 +97,10 @@ stroke-opacity="0.8"   <!-- 描边透明度 -->
 
 3. 虚线
 ```xml
-stroke-dasharray="5,5" <!-- 虚线样式 -->
+stroke-dasharray="10,5" <!-- 虚线样式 -->
 ```
+
+![img](https://gitee.com/wscfan/images/raw/master/202411211637959.png) 
 
 ## 变换
 
@@ -123,6 +125,8 @@ stroke-dasharray="5,5" <!-- 虚线样式 -->
     <rect x="110" y="100" width="25" height="25" fill="#FFFFFF"/>
 </svg>
 ```
+
+![image-20241121163246902](https://gitee.com/wscfan/images/raw/master/202411211632953.png) 
 
 ## 最佳实践
 1. 始终设置 viewBox 属性以确保正确缩放
